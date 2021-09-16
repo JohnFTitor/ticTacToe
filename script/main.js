@@ -9,16 +9,42 @@ const Game = (function() {
             gameboard[row][column] = movement;
         }
     
-        const displayArray = () => {
-            console.log(gameboard);
+        const getGameBoard = () => {
+            let gameboardCopy = gameboard.map( (row) => {
+                return [...row];
+            })
+            return gameboardCopy;
         }
     
         return {
             add: add,
-            display: displayArray
+            get: getGameBoard
         }
     
     })();
+
+    const BoardDisplay = (function () {
+        const gameboard = Array.from(document.querySelectorAll('.box'));
+
+        const render = () => {
+            let gameboardArray = GameBoard.get();
+            let i = 0;
+            let j = 0;
+            gameboard.forEach ( (box) => {
+                if (j === 3){
+                    j = 0;
+                    i++;
+                }
+                box.firstChild.textContent = gameboardArray[i][j]
+                j++;
+            }) 
+        }
+
+        return {
+            render: render
+        }
+
+    })()
     
     function Player(name, movement){
         let playerName = name;
@@ -29,7 +55,7 @@ const Game = (function() {
             const column = prompt('which column r u gonna choose?' + playerName, '0');
             GameBoard.add(playerMovement, row, column);
             console.log(`${playerName} has made its move`);
-            GameBoard.display();
+            BoardDisplay.render();
         }
     
         return {
@@ -53,7 +79,8 @@ const Game = (function() {
     }
     
     return {
-        start: start
+        start: start,
     }
     
 })()
+
