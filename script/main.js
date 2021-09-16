@@ -23,20 +23,31 @@ const Game = (function() {
     
     })();
 
-    const BoardDisplay = (function () {
+    const selectors = (() => {
         const gameboard = Array.from(document.querySelectorAll('.box'));
+        const selectors = [];
+        
+        let row = 0;
+        let column = 0;
+        gameboard.forEach ( (box) => {
+            if (column === 3){
+                column = 0;
+                row++;
+            }
+            selectors.push(Box(box, row, column));
+            column++;
+        })
+        
+        return selectors;
+
+    })()
+
+    const BoardDisplay = (function () {
 
         const render = () => {
             let gameboardArray = GameBoard.get();
-            let i = 0;
-            let j = 0;
-            gameboard.forEach ( (box) => {
-                if (j === 3){
-                    j = 0;
-                    i++;
-                }
-                box.firstChild.textContent = gameboardArray[i][j]
-                j++;
+            selectors.forEach ( (box) => {
+                box.selector.firstElementChild.textContent = gameboardArray[box.row][box.column];
             }) 
         }
 
@@ -45,6 +56,14 @@ const Game = (function() {
         }
 
     })()
+
+    function Box (selector, row, column) {
+        return {
+            selector: selector,
+            row: row,
+            column: column
+        }
+    }
     
     function Player(name, movement){
         let playerName = name;
@@ -77,7 +96,7 @@ const Game = (function() {
             player2.play();
         }
     }
-    
+
     return {
         start: start,
     }
