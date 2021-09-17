@@ -23,11 +23,53 @@ const Game = (function() {
                          ["", "", ""],
                          ["", "", ""]];
         }
-    
+
+        const _checkLine = (row = [0,1,2], column = [0,1,2]) => {
+            if (gameboard[row[0]][column[0]] === gameboard[row[1]][column[1]] && gameboard[row[1]][column[1]] === gameboard[row[2]][column[2]] && gameboard[row[0]][column[0]] !== ""){
+                return [true, gameboard[row[0]][column[0]]];
+            }
+            return [false, null];
+        }
+        
+        const checkBoard = () => {
+            let result = [false, null];
+            if (count >= 4) {
+                for(let row=0; row < gameboard.length; row++){
+                    let rowArray = [row,row,row];
+                    result = _checkLine(rowArray);
+                    if (result[0]){
+                        return result;
+                    }
+                }
+                for(let column= 0; column < gameboard.length; column++){
+                    let rowArray = [0,1,2];
+                    let columnArray = [column, column, column];
+                    result = _checkLine(rowArray, columnArray);
+                    if (result[0]){
+                        return result;
+                    }
+                }
+                result = _checkLine();
+                if (result[0]){
+                    return result;
+                }
+                result = _checkLine([2,1,0],[0,1,2]);
+                if (result[0]){
+                    return result;
+                }
+
+                if (count === 8 && !(result[0])){
+                    return [true, "Tie"];
+                }
+            }
+            return result;
+        }
+
         return {
             add: add,
             get: getGameBoard,
-            reset: resetGameBoard
+            reset: resetGameBoard,
+            check: checkBoard
         }
     
     })();
@@ -57,7 +99,8 @@ const Game = (function() {
             let gameboardArray = Gameboard.get();
             boxes.forEach ( (box) => {
                 box.selector.firstElementChild.textContent = gameboardArray[box.row][box.column];
-            }) 
+            })
+            Gameboard.check(); 
         }
 
         return {
@@ -100,10 +143,10 @@ const Game = (function() {
     }  
     
     const start = () => {
-
+        
+        count = 0;
         Gameboard.reset();
         BoardDisplay.render();
-        count = 0;
 
         const p1 = "Mike";
         const p1Movement = "X";
@@ -117,8 +160,7 @@ const Game = (function() {
             newMark = mark.bind(box.selector, box, player1, player2);
             box.newMark = newMark;
             box.selector.addEventListener('click', newMark);
-        })
-        
+        })       
     }
     
     start();
