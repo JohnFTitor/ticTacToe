@@ -23,9 +23,9 @@ const Game = (function() {
     
     })();
 
-    const selectors = (() => {
+    const boxes = (() => {
         const gameboard = Array.from(document.querySelectorAll('.box'));
-        const selectors = [];
+        const boxes = [];
         
         let row = 0;
         let column = 0;
@@ -34,11 +34,11 @@ const Game = (function() {
                 column = 0;
                 row++;
             }
-            selectors.push(Box(box, row, column));
+            boxes.push(Box(box, row, column));
             column++;
         })
         
-        return selectors;
+        return boxes;
 
     })()
 
@@ -46,7 +46,7 @@ const Game = (function() {
 
         const render = () => {
             let gameboardArray = GameBoard.get();
-            selectors.forEach ( (box) => {
+            boxes.forEach ( (box) => {
                 box.selector.firstElementChild.textContent = gameboardArray[box.row][box.column];
             }) 
         }
@@ -69,9 +69,7 @@ const Game = (function() {
         let playerName = name;
         let playerMovement = movement;
     
-        const play = () => {
-            const row = prompt('which row are you gonna choose? ' + playerName, '0');
-            const column = prompt('which column r u gonna choose?' + playerName, '0');
+        const play = (row, column) => {
             GameBoard.add(playerMovement, row, column);
             console.log(`${playerName} has made its move`);
             BoardDisplay.render();
@@ -82,6 +80,18 @@ const Game = (function() {
         }
     }
 
+    
+    let count;
+
+    function mark(row, column, player1, player2){
+        if (count%2 === 0){
+            player1.play(row, column);
+        } else {
+            player2.play(row, column);
+        }
+        count++;
+    }  
+    
     const start = () => {
         const p1 = prompt('State your name, Player');
         const p1Movement = prompt('Which symbol are you gonna use?');
@@ -90,15 +100,18 @@ const Game = (function() {
         
         const player1 = Player(p1,p1Movement);
         const player2 = Player(p2,p2Movement);
-
-        for (let i = 0; i < 4; i++) {
-            player1.play();
-            player2.play();
-        }
+        
+        count = 0;
+        
+        boxes.forEach( (box) => {
+            box.selector.addEventListener('click', mark.bind(box.selector, box.row, box.column, player1, player2));
+        })
+        
     }
+    
 
     return {
-        start: start,
+        start: start
     }
     
 })()
