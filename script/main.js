@@ -1,5 +1,7 @@
 const Game = (function() {
-    const GameBoard = (function () {
+    let count;
+
+    const Gameboard = (function () {
     
         let gameboard = [["", "", ""],
                          ["", "", ""],
@@ -15,10 +17,17 @@ const Game = (function() {
             })
             return gameboardCopy;
         }
+
+        const resetGameBoard = () => {
+            gameboard = [["", "", ""],
+                         ["", "", ""],
+                         ["", "", ""]];
+        }
     
         return {
             add: add,
-            get: getGameBoard
+            get: getGameBoard,
+            reset: resetGameBoard
         }
     
     })();
@@ -45,7 +54,7 @@ const Game = (function() {
     const BoardDisplay = (function () {
 
         const render = () => {
-            let gameboardArray = GameBoard.get();
+            let gameboardArray = Gameboard.get();
             boxes.forEach ( (box) => {
                 box.selector.firstElementChild.textContent = gameboardArray[box.row][box.column];
             }) 
@@ -70,7 +79,7 @@ const Game = (function() {
         let playerMovement = movement;
     
         const play = (row, column) => {
-            GameBoard.add(playerMovement, row, column);
+            Gameboard.add(playerMovement, row, column);
             console.log(`${playerName} has made its move`);
             BoardDisplay.render();
         }
@@ -80,35 +89,39 @@ const Game = (function() {
         }
     }
 
-    
-    let count;
-
-    function mark(row, column, player1, player2){
+    function mark(box, player1, player2){
         if (count%2 === 0){
-            player1.play(row, column);
+            player1.play(box.row, box.column);
         } else {
-            player2.play(row, column);
+            player2.play(box.row, box.column);
         }
         count++;
+        this.removeEventListener('click', box.newMark);
     }  
     
     const start = () => {
-        const p1 = prompt('State your name, Player');
-        const p1Movement = prompt('Which symbol are you gonna use?');
-        const p2 = prompt('State your name, Player 2');
-        const p2Movement = prompt('Same question. Which symbol are you gonna use?');
+
+        Gameboard.reset();
+        BoardDisplay.render();
+        count = 0;
+
+        const p1 = "Mike";
+        const p1Movement = "X";
+        const p2 = "Rick";
+        const p2Movement = "O";
         
         const player1 = Player(p1,p1Movement);
         const player2 = Player(p2,p2Movement);
-        
-        count = 0;
-        
+    
         boxes.forEach( (box) => {
-            box.selector.addEventListener('click', mark.bind(box.selector, box.row, box.column, player1, player2));
+            newMark = mark.bind(box.selector, box, player1, player2);
+            box.newMark = newMark;
+            box.selector.addEventListener('click', newMark);
         })
         
     }
     
+    start();
 
     return {
         start: start
