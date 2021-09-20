@@ -1,5 +1,6 @@
 const Game = (function() {
     let count;
+    const message= document.querySelector('#winner');
 
     const Gameboard = (function () {
     
@@ -33,7 +34,7 @@ const Game = (function() {
         
         const checkBoard = () => {
             let result = [false, null];
-            if (count >= 4) {
+            if (count >= 5) {
                 for(let row=0; row < gameboard.length; row++){
                     let rowArray = [row,row,row];
                     result = _checkLine(rowArray);
@@ -58,7 +59,7 @@ const Game = (function() {
                     return result;
                 }
 
-                if (count === 8 && !(result[0])){
+                if (count === 9 && !(result[0])){
                     return [true, "Tie"];
                 }
             }
@@ -100,7 +101,6 @@ const Game = (function() {
             boxes.forEach ( (box) => {
                 box.selector.firstElementChild.textContent = gameboardArray[box.row][box.column];
             })
-            Gameboard.check(); 
         }
 
         return {
@@ -120,6 +120,14 @@ const Game = (function() {
     function Player(name, movement){
         let playerName = name;
         let playerMovement = movement;
+
+        const getName = () => {
+            return playerName;
+        }
+
+        const getMovement = () => {
+            return playerMovement;
+        }
     
         const play = (row, column) => {
             Gameboard.add(playerMovement, row, column);
@@ -128,7 +136,9 @@ const Game = (function() {
         }
     
         return {
-            play: play
+            play: play,
+            getName: getName,
+            getMovement: getMovement
         }
     }
 
@@ -140,7 +150,26 @@ const Game = (function() {
         }
         count++;
         this.removeEventListener('click', box.newMark);
-    }  
+        checkGame(player1, player2);
+    } 
+    
+    function checkGame(player1, player2) {
+        let result = Gameboard.check();
+        if (result[0]){
+            let winner = (() => {
+                if (player1.getMovement() === result[1]){
+                    return player1.getName();
+                } else if (player2.getMovement() === result[1]){
+                    return player2.getName();
+                } 
+                return result[1];
+            })();
+            message.textContent = "The winner is: " + winner;
+            boxes.forEach((box) => {
+                box.selector.removeEventListener('click', box.newMark);
+            })
+        }
+    }
     
     const start = () => {
         
