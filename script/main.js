@@ -192,11 +192,20 @@ const Game = (function() {
         })       
     }
     
-    start();
-
     return {
         start: start
     }
     
 })()
 
+function start(){
+    menu.style.display = "none";
+    gameScreen.style.display = "flex";
+    Game.start();
+}
+
+const startGame = document.querySelector("#startButton");
+const menu = document.querySelector("#menu");
+const gameScreen = document.querySelector("#game");
+
+startGame.addEventListener('click', start);
