@@ -1,5 +1,7 @@
 <link href="style/reset.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <script src="script/main.js" defer></script>
 
 <html>
@@ -8,10 +10,66 @@
             <button id= "startButton"> Start </button>
             <div id= "playerSelectors" class= "container">
                 <div id= "left" class= "playerSelector container">
-    
+                    <form id= "player1" class="container">
+                        <label for= "name1" class= "label container">
+                            State your name, Player 
+                            <input type="text" id= "name1" class="inputName" autocomplete="off">
+                        </label>
+                        <label for= "player1Weapon" class="label container">
+                            Select your weapon
+                            <div id="player1Weapon"  type="radio" class="playerWeapon">
+                                <label class="radioContainer selection1">
+                                    <input type="radio" name="selectionPlayer1" value="X" checked>
+                                    <span class="radioButton">
+                                        <img src="icons/X.svg">
+                                    </span>
+                                </label>
+                                <label class="radioContainer selection2">
+                                    <input type="radio" name="selectionPlayer1" value="O">
+                                    <span class="radioButton">
+                                        <img src="icons/O.svg">
+                                    </span>
+                                </label>
+                                <label class="radioContainer selection3">
+                                    <input  type="radio" name="selectionPLayer1" value="T">
+                                    <span class="radioButton">
+                                        <img src="icons/T.svg">
+                                    </span>
+                                </label>
+                            </div>
+                        </label>
+                    </form>
                 </div>
                 <div id= "right" class= "playerSelector container">
-    
+                    <form id= "player2" class="container">
+                        <label for= "name2" class= "label container">
+                            State your name, Player 
+                            <input type="text" id= "name2" class="inputName" autocomplete="off">
+                        </label>
+                        <label for= "player2Weapon" class="label container">
+                            Select your weapon
+                            <div id="player2Weapon"  type="radio" class="playerWeapon">
+                                <label class="radioContainer selection1">
+                                    <input type="radio" name="selectionPlayer2" value="X" checked>
+                                    <span class="radioButton">
+                                        <img src="icons/X.svg">
+                                    </span>
+                                </label>
+                                <label class="radioContainer selection2">
+                                    <input type="radio" name="selectionPLayer2" value="O">
+                                    <span class="radioButton">
+                                        <img src="icons/O.svg">
+                                    </span>
+                                </label>
+                                <label class="radioContainer selection3">
+                                    <input  type="radio" name="selectionPLayer2" value="T">
+                                    <span class="radioButton">
+                                        <img src="icons/T.svg">
+                                    </span>
+                                </label>
+                            </div>
+                        </label>
+                    </form>    
                 </div>
             </div>
             <div id= "container" >

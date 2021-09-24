@@ -209,3 +209,4 @@ const menu = document.querySelector("#menu");
 const gameScreen = document.querySelector("#game");
 
 startGame.addEventListener('click', start);
+

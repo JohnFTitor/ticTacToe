@@ -6,12 +6,18 @@ h1 {
     font-size: 3rem;
 }
 
+/*  Menu Styling  */
+
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    color: white;
+    font-size: 2rem;
+    font-family: sans-serif;
 }
 
 #playerSelectors {
@@ -21,7 +27,6 @@ h1 {
 
 .playerSelector {
     width: 100%;
-    height: 100vh;
 }
 
 #right {
@@ -31,6 +36,7 @@ h1 {
 #left {
     background-color: rgb(26, 26, 26);
 }
+
 
 #startButton {
     position: absolute;
@@ -52,6 +58,95 @@ h1 {
     color: white;
     cursor: pointer;
 }
+
+/* Form Styling */
+
+.inputName{
+    appearance: none;
+    margin: 30px 0 30px 0;
+    width: 20rem;
+    height: 4rem;
+    font-size: 2rem;
+    font-family: sans-serif;
+    border: 2px solid rgb(196, 196, 196);
+    background-color: rgba(255, 255, 255, 0.021);
+    color: rgb(196, 196, 196);
+    outline: none;
+}
+
+.inputName:focus-visible{
+    outline: 1px solid rgb(255, 255, 255);
+}
+
+form {
+    z-index: 3;
+}
+
+.label {
+    height: auto;    
+}
+
+.playerWeapon {
+    width: 30rem;
+    height: 10rem;
+}
+
+/* Personalized Radio Buttons*/
+
+.radioContainer {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.radioContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.radioButton {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 75px;
+    width: 75px;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: all linear 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.radioContainer:hover input ~ .radioButton {
+    transform: scale(1.2);
+    border: 3px solid rgb(61, 0, 0);
+}
+
+.radioContainer input:checked ~ .radioButton {
+    border: 3px solid rgb(61, 0, 0);
+}
+
+.selection1 {
+    left: 0;
+}
+
+.selection2 {
+    left: 10rem;
+}
+
+.selection3 {
+    left: 20rem;
+}
+
+/*  Tic Tac Toe Game Styling  */
 
 #game {
     display: none;
@@ -79,6 +174,8 @@ h1 {
 .box:hover {
     cursor: pointer;
 }
+
+/* 3D Cube Animation for the menu */
 
 @keyframes rotateY {
     0% {transform: translateZ(-75px) rotateY(   0deg) rotateX( 0deg);}
