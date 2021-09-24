@@ -41,6 +41,7 @@ h1 {
     background-color: black;
     color: rgb(241, 241, 241);
     transition: all ease-in-out 0.2s;
+    z-index: 2;
 }
 
 #startButton:hover {
@@ -77,4 +78,106 @@ h1 {
 
 .box:hover {
     cursor: pointer;
+}
+
+@keyframes rotateY {
+    0% {transform: translateZ(-75px) rotateY(   0deg) rotateX( 0deg);}
+    25% {transform: translateZ(-75px) rotateY( -90deg) rotateX( -90deg);}
+    50% {transform: translateZ(-75px) rotateY(-180deg) rotateX( -180deg);}
+    75% {transform: translateZ(-75px) rotateY(  -270deg) rotateX( -270deg);}
+    100% {transform: translateZ(-75px) rotateY(   -360deg) rotateX( -360deg);}
+}
+
+@keyframes rotateX {
+    0% {transform: translateZ(-75px) rotateX( 0deg);}
+    25% {transform: translateZ(-75px) rotateX( -90deg);}
+    50% {transform: translateZ(-75px) rotateX( -180deg);}
+    75% {transform: translateZ(-75px) rotateX( -270deg);}
+    100% {transform: translateZ(-75px) rotateX( -360deg);}
+}
+
+@keyframes moveScene {
+    0% { top: 5%; left: 5%;}
+    5% { top: 25%; left: 25%;}
+    10% { top: 50%; left: 50%;}
+    15% { top: 75%; left: 95%;}
+    20% { top: 75%; left: 50%;}
+    25% { top: 75%; left: 25%;}
+    30% { top: 75%; left: 5%;}
+    35% { top: 50%; left: 25%;}
+    40% { top: 25%; left: 50%;}
+    45% { top: 5%; left: 95%;}
+    50% { top: 5%; left: 50%;}
+    55% { top: 5%; left: 25%;}
+    60% { top: 5%; left: 5%;}
+    65% { top: 50%; left: 5%;}
+    70% { top: 75%; left: 5%;}
+    75% { top: 75%; left: 50%;}
+    80% { top: 75%; left: 95%;}
+    85% { top: 25%; left: 95%;}
+    90% { top: 5%; left: 95%;}
+    95% { top: 5%; left: 25%;}
+    100% { top: 5%; left: 5%;}
+}
+
+#container {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.scene {
+    width: 200px;
+    height: 200px;
+    perspective: 600px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    animation: moveScene 20s linear infinite;
+}
+
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(-75px);
+    transition: transform 1s;
+    margin-bottom: 20px;
+    animation: rotateY 4s linear 0s infinite;
+}
+
+.cube__face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border: 3px dashed rgb(26, 26, 26);
+    background: rgba(155, 155, 155, 0.301);
+}
+
+.cube__face--front {
+    transform: rotateY(0deg) translateZ(75px);
+    
+}
+.cube__face--right {
+    transform: rotateY(90deg) translateZ(75px);
+    
+}
+.cube__face--back {
+    transform: rotateY(180deg) translateZ(75px);
+}
+.cube__face--left {
+    transform: rotateY(-90deg) translateZ(75px);
+}
+.cube__face--top {
+    transform: rotateX(90deg) translateZ(75px);
+}
+.cube__face--bottom {
+    transform: rotateX(-90deg) translateZ(75px);
 }
