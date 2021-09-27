@@ -9,3 +9,5 @@ After that, I worked in the method that would check if there's a condition for o
 20/09/2021: Today I added the functionality to the page. I decided to create a function inside the Game object that evaluated the results from the checkboard method. This function is gonna be called inside the event listener for each mark, after the players play() method, thus I can pass as a parameter the player object and could access their properties. Now I'm working in the front page on branch development, to handle player definition and the start of the Game.  
 
 23/09/2021: I wanted to try something new, so I learned a bit of CSS 3D transform with this tutorial: https://3dtransforms.desandro.com/ and made this 3D animation for the Menu, so it looks more like a Game in the intro. It was worth.
+
+24/09/2021: Not too much progress this day. Just added a basic form for the players name statement and selection of the icon. I do have bug though (The radio group doesn't seem to work properly, as one selection stays still).
