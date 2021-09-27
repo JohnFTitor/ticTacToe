@@ -4,6 +4,17 @@ html {
 
 h1 {
     font-size: 3rem;
+    color: black;
+}
+
+p {
+    color: black;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 /*  Menu Styling  */
@@ -78,6 +89,10 @@ h1 {
     outline: 1px solid rgb(255, 255, 255);
 }
 
+#name2 {
+    color: black;
+}
+
 form {
     z-index: 3;
 }
@@ -132,6 +147,10 @@ form {
 
 .radioContainer input:checked ~ .radioButton {
     border: 3px solid rgb(61, 0, 0);
+}
+
+.radioContainer input:disabled ~ .radioButton {
+    background-color: rgb(119, 0, 0)
 }
 
 .selection1 {
