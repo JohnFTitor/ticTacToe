@@ -198,27 +198,43 @@ const Game = (function () {
 
 })()
 
+function checkvalues(){
+    player1selection = player1container.querySelector(":checked");
+    player2selection = player2container.querySelector(":checked");
+    if (player1selection === null || player2selection === null || player1name.value === "" || player2name.value === ""){
+        alert("Can't start Game.Verify you filled the name input and selected a weapon");
+        return false;
+    }
+    return true;
+}
+
 function start() {
-    menu.style.display = "none";
-    gameScreen.style.display = "flex";
-    Game.start();
+    if (checkvalues()){
+        menu.style.display = "none";
+        gameScreen.style.display = "flex";
+        Game.start();
+    }
 }
 
 const startGame = document.querySelector("#startButton");
 const menu = document.querySelector("#menu");
 const gameScreen = document.querySelector("#game");
+const player1name = document.querySelector("#name1");
+const player2name = document.querySelector("#name2");
 
 startGame.addEventListener('click', start);
 
 //Disable other player options 
 
-const player1selection = document.querySelector("#player1Weapon");
-const player2selection = document.querySelector("#player2Weapon");
-let player2Options = document.querySelectorAll("input[name='selectionPlayer2']");
+const player1container = document.querySelector("#player1Weapon");
+const player2container = document.querySelector("#player2Weapon");
+let player1selection = player1container.querySelector(":checked");
+let player2selection = player2container.querySelector(":checked");
+const player2Options = document.querySelectorAll("input[name='selectionPlayer2']");
 let disabledOption = "";
 
 function disableOptions(){
-    let selection  = player1selection.querySelector(":checked");
+    let selection  = player1container.querySelector(":checked");
     if (disabledOption){
         disabledOption.disabled = false;
     }
@@ -227,10 +243,9 @@ function disableOptions(){
             option.disabled = true;
             option.checked = false;
             disabledOption = option;
-            console.log("I disabled: " + disabledOption.value);
         }
     })
 }
 
 disableOptions();
-player1selection.addEventListener('change', disableOptions);
+player1container.addEventListener('change', disableOptions);
