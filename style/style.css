@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 html {
     font-size: 10px;
 }
@@ -48,26 +50,31 @@ body {
     background-color: rgb(26, 26, 26);
 }
 
-
-#startButton {
-    position: absolute;
-    width: 20rem;
-    height: 8rem;
+button {
     font-size: 4rem;
     font-family: sans-serif;
     background-color: black;
     color: rgb(241, 241, 241);
     transition: all ease-in-out 0.2s;
+}
+
+button:hover {
+    font-size: 4.5rem;
+    background-color: rgb(95 0 0);
+    color: white;
+    cursor: pointer;
+}
+
+#startButton {
+    position: absolute;
+    width: 20rem;
+    height: 8rem;
     z-index: 2;
 }
 
 #startButton:hover {
     width: 21rem;
     height: 9rem;
-    font-size: 4.5rem;
-    background-color: rgb(95 0 0);
-    color: white;
-    cursor: pointer;
 }
 
 /* Form Styling */
@@ -169,14 +176,44 @@ form {
 
 #game {
     display: none;
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(226, 226, 226)
+}
+
+#game h1 {
+    font-size: 5rem;
+    font-weight: 600;
 }
 
 #gameBoard {
+    margin: 3rem 0 3rem 0;
     width: 40rem;
     height: 40rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+}
+
+#gameControl {
+    margin-top: 4rem;
+}
+
+#gameControl button {
+    width: 20rem;
+    height: 5rem;
+}
+
+#gameControl button:hover {
+    width: 21rem;
+    height: 6rem;
+}
+
+#restartButton:hover {
+    background-color:rgb(47, 0, 61)
+}
+
+#finishButton:hover {
+    background-color:rgb(94, 57, 9)
 }
 
 .box {

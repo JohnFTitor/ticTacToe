@@ -102,6 +102,8 @@ const Game = (function () {
                 box.selector.firstElementChild.src = gameboardArray[box.row][box.column];
                 if (gameboardArray[box.row][box.column] !== ""){
                     box.selector.firstElementChild.style.display = "block";
+                } else {
+                    box.selector.firstElementChild.style.display = "none";
                 }
             })
         }
@@ -151,7 +153,7 @@ const Game = (function () {
             player2.play(box.row, box.column);
         }
         count++;
-        this.removeEventListener('click', box.newMark);
+        this.selector.removeEventListener('click', box.newMark);
         checkGame(player1, player2);
     }
 
@@ -166,7 +168,11 @@ const Game = (function () {
                 }
                 return result[1];
             })();
-            message.textContent = "The winner is: " + winner;
+            if (winner === "Tie"){
+                message.textContent = `Ashamedly, this seems to be a Tie. What about another round?`;
+            } else {
+                message.textContent = `Congratulations, ${winner}! You won this round`;
+            }
             boxes.forEach((box) => {
                 box.selector.removeEventListener('click', box.newMark);
             })
@@ -178,6 +184,7 @@ const Game = (function () {
         count = 0;
         Gameboard.reset();
         BoardDisplay.render();
+        message.textContent = "";
 
         const player1 = Player(p1, p1Movement);
         const player2 = Player(p2, p2Movement);
@@ -189,8 +196,19 @@ const Game = (function () {
         })
     }
 
+    const reset = () => {
+        count = 0;
+        Gameboard.reset();
+        BoardDisplay.render();
+        message.textContent = "";
+        boxes.forEach((box) => {
+            box.selector.removeEventListener('click', box.newMark);
+        })
+    }
+
     return {
-        start: start
+        start: start,
+        reset: reset
     }
 
 })()
@@ -213,13 +231,28 @@ function start() {
     }
 }
 
+function reset(){
+    Game.reset();
+    start();
+}
+
+function finish(){
+    menu.style.display = "flex";
+    gameScreen.style.display = "none";
+    Game.reset();
+}
+
 const startGame = document.querySelector("#startButton");
 const menu = document.querySelector("#menu");
 const gameScreen = document.querySelector("#game");
 const player1name = document.querySelector("#name1");
 const player2name = document.querySelector("#name2");
+const restartGame = document.querySelector("#restartButton");
+const finishGame = document.querySelector("#finishButton");
 
 startGame.addEventListener('click', start);
+restartGame.addEventListener('click', reset);
+finishGame.addEventListener('click', finish);
 
 //Disable other player options 
 
