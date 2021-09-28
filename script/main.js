@@ -99,7 +99,10 @@ const Game = (function () {
         const render = () => {
             let gameboardArray = Gameboard.get();
             boxes.forEach((box) => {
-                box.selector.firstElementChild.textContent = gameboardArray[box.row][box.column];
+                box.selector.firstElementChild.src = gameboardArray[box.row][box.column];
+                if (gameboardArray[box.row][box.column] !== ""){
+                    box.selector.firstElementChild.style.display = "block";
+                }
             })
         }
 
@@ -131,7 +134,6 @@ const Game = (function () {
 
         const play = (row, column) => {
             Gameboard.add(playerMovement, row, column);
-            console.log(`${playerName} has made its move`);
             BoardDisplay.render();
         }
 
@@ -171,16 +173,11 @@ const Game = (function () {
         }
     }
 
-    const start = () => {
+    const start = (p1, p2, p1Movement, p2Movement) => {
 
         count = 0;
         Gameboard.reset();
         BoardDisplay.render();
-
-        const p1 = "Mike";
-        const p1Movement = "X";
-        const p2 = "Rick";
-        const p2Movement = "O";
 
         const player1 = Player(p1, p1Movement);
         const player2 = Player(p2, p2Movement);
@@ -212,7 +209,7 @@ function start() {
     if (checkvalues()){
         menu.style.display = "none";
         gameScreen.style.display = "flex";
-        Game.start();
+        Game.start(player1name.value, player2name.value, player1selection.value, player2selection.value);
     }
 }
 

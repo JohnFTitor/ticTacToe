@@ -194,6 +194,12 @@ form {
     cursor: pointer;
 }
 
+.movement {
+    display: none;
+    width: 80%;
+    height: auto;
+}
+
 /* 3D Cube Animation for the menu */
 
 @keyframes rotateY {
