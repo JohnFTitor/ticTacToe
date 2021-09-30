@@ -146,7 +146,7 @@ const Game = (function () {
         }
     }
 
-    function mark(box, player1, player2) {
+    function markPlayer(box, player1, player2) {
         if (count % 2 === 0) {
             player1.play(box.row, box.column);
         } else {
@@ -155,6 +155,30 @@ const Game = (function () {
         count++;
         this.removeEventListener('click', box.newMark);
         checkGame(player1, player2);
+    }
+
+    function markAI(box,player1,player2){
+        player1.play(box.row, box.column);
+        count++;
+        this.removeEventListener('click', box.newMark);
+        if(!checkGame(player1,player2)){
+            playAI(player2);
+            checkGame(player1,player2);
+        }
+    }
+
+    function playAI(player){
+        let gameboardArray = Gameboard.get();
+        while(count < 9){
+            let randomIndex = Math.floor(Math.random() * 9);
+            let box = boxes[randomIndex];
+            if (gameboardArray[box.row][box.column] == ''){
+                player.play(box.row,box.column);
+                box.selector.removeEventListener('click', box.newMark);
+                break;
+            }
+        }
+        count++;
     }
 
     function checkGame(player1, player2) {
@@ -176,6 +200,7 @@ const Game = (function () {
             boxes.forEach((box) => {
                 box.selector.removeEventListener('click', box.newMark);
             })
+            return true;
         }
     }
 
@@ -189,11 +214,20 @@ const Game = (function () {
         const player1 = Player(p1, p1Movement);
         const player2 = Player(p2, p2Movement);
 
-        boxes.forEach((box) => {
-            let newMark = mark.bind(box.selector, box, player1, player2);
-            box.newMark = newMark;
-            box.selector.addEventListener('click', newMark);
-        })
+
+        if(toggleAI.textContent === "Player"){
+            boxes.forEach((box) => {
+                let newMark = markPlayer.bind(box.selector, box, player1, player2);
+                box.newMark = newMark;
+                box.selector.addEventListener('click', newMark);
+            })
+        }else {
+            boxes.forEach((box) => {
+                let newMark = markAI.bind(box.selector, box, player1, player2);
+                box.newMark = newMark;
+                box.selector.addEventListener('click', newMark);
+            })
+        }
     }
 
     const reset = () => {
