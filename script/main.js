@@ -276,3 +276,20 @@ function disableOptions(){
 disableOptions();
 player1container.addEventListener('change', disableOptions);
 
+//AI implementation
+
+const player2Form = document.querySelector("#player2");
+const toggleAI = document.querySelector("#toggleAI");
+
+//Disable default form behaviour
+player2Form.addEventListener('submit', (event) => {
+    event.preventDefault();
+})
+
+toggleAI.addEventListener('click', () => {
+    if(toggleAI.textContent === "Player"){
+        toggleAI.textContent = "AI"
+    } else {
+        toggleAI.textContent = "Player"
+    }
+})

@@ -98,10 +98,36 @@ button:hover {
 
 #name2 {
     color: black;
+    border: 2px solid rgb(26, 26, 26);
 }
 
 form {
+    position: relative;
     z-index: 3;
+    box-sizing: border-box;
+}
+
+#player1 {
+    height: 50vh;
+    border: 4px solid rgb(155, 155, 155);
+}
+
+#player2 {
+    height: 50vh;
+    border: 4px solid rgb(26, 26, 26);
+}
+
+#player2 .label {
+    color: rgb(12, 12, 12);
+}
+
+#toggleAI {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 5rem;
+    font-size: 3.5rem;
 }
 
 .label {
