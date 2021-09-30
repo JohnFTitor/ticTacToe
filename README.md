@@ -11,3 +11,5 @@ After that, I worked in the method that would check if there's a condition for o
 23/09/2021: I wanted to try something new, so I learned a bit of CSS 3D transform with this tutorial: https://3dtransforms.desandro.com/ and made this 3D animation for the Menu, so it looks more like a Game in the intro. It was worth.
 
 24/09/2021: Not too much progress this day. Just added a basic form for the players name statement and selection of the icon. I do have bug though (The radio group doesn't seem to work properly, as one selection stays still).
+
+27/09/2021: Fixed the radio button groups and changed functionality for now displaying the icon instead of raw text. I also added some restart and finish buttons but it seems to be the functionality of the game broke, so I'll have to work on that.

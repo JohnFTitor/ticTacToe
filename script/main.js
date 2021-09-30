@@ -190,7 +190,7 @@ const Game = (function () {
         const player2 = Player(p2, p2Movement);
 
         boxes.forEach((box) => {
-            newMark = mark.bind(box.selector, box, player1, player2);
+            let newMark = mark.bind(box.selector, box, player1, player2);
             box.newMark = newMark;
             box.selector.addEventListener('click', newMark);
         })
