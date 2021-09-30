@@ -75,6 +75,14 @@ const Game = (function () {
 
     })();
 
+    function Box(selector, row, column) {
+        return {
+            selector: selector,
+            row: row,
+            column: column
+        }
+    }
+
     const boxes = (() => {
         const gameboard = Array.from(document.querySelectorAll('.box'));
         const boxes = [];
@@ -113,14 +121,6 @@ const Game = (function () {
         }
 
     })()
-
-    function Box(selector, row, column) {
-        return {
-            selector: selector,
-            row: row,
-            column: column
-        }
-    }
 
     function Player(name, movement) {
         let playerName = name;
