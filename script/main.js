@@ -153,7 +153,7 @@ const Game = (function () {
             player2.play(box.row, box.column);
         }
         count++;
-        this.selector.removeEventListener('click', box.newMark);
+        this.removeEventListener('click', box.newMark);
         checkGame(player1, player2);
     }
 
@@ -197,10 +197,6 @@ const Game = (function () {
     }
 
     const reset = () => {
-        count = 0;
-        Gameboard.reset();
-        BoardDisplay.render();
-        message.textContent = "";
         boxes.forEach((box) => {
             box.selector.removeEventListener('click', box.newMark);
         })
@@ -237,9 +233,9 @@ function reset(){
 }
 
 function finish(){
+    Game.reset();
     menu.style.display = "flex";
     gameScreen.style.display = "none";
-    Game.reset();
 }
 
 const startGame = document.querySelector("#startButton");
@@ -279,3 +275,4 @@ function disableOptions(){
 
 disableOptions();
 player1container.addEventListener('change', disableOptions);
+
