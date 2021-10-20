@@ -1,5 +1,6 @@
 const Game = (function () {
     let count;
+    let AIcount;
     const message = document.querySelector('#winner');
 
     const Gameboard = (function () {
@@ -32,7 +33,7 @@ const Game = (function () {
             return [false, null];
         }
 
-        const checkBoard = () => {
+        const checkBoard = (count, gameboard) => {
             let result = [false, null];
             if (count >= 5) {
                 for (let row = 0; row < gameboard.length; row++) {
@@ -181,8 +182,42 @@ const Game = (function () {
         count++;
     }
 
+    function minimax(node, depth, maximizingPlayer, player1, player2){
+        let result = Gameboard.check(AIcount, node);
+        if (depth === 0 || result[0]){
+            if  (player2.getMovement() === result[1]) {
+                return +10;
+            } else if (player1.getMovement() === result[1]) {
+                return -10;
+            } 
+            return 0;            
+        } 
+        if (maximizingPlayer){
+            value = -Infinity;
+            let children =  createChildren(node, player2.getMovement());
+            console.log(children);
+        }
+    }
+
+    function createChildren(node, playerMovement){
+        let childList = [];
+        for(let row = 0; row < node.length; row++){
+            for(let column = 0; column < node.length; column++){
+                if (node[row][column] == ""){
+                    let nodeChild = node.map((row) => {
+                        return [...row];
+                    })
+                    nodeChild[row][column] = playerMovement;
+                    childList.push(nodeChild);
+                }    
+            }
+        }
+        return childList;
+    }
+
+
     function checkGame(player1, player2) {
-        let result = Gameboard.check();
+        let result = Gameboard.check(count, Gameboard.get());
         if (result[0]) {
             let winner = (() => {
                 if (player1.getMovement() === result[1]) {
@@ -207,6 +242,7 @@ const Game = (function () {
     const start = (p1, p2, p1Movement, p2Movement) => {
 
         count = 0;
+        AIcount = 0;
         Gameboard.reset();
         BoardDisplay.render();
         message.textContent = "";
@@ -238,7 +274,8 @@ const Game = (function () {
 
     return {
         start: start,
-        reset: reset
+        reset: reset,
+        createChildren: createChildren
     }
 
 })()
@@ -322,8 +359,8 @@ player2Form.addEventListener('submit', (event) => {
 
 toggleAI.addEventListener('click', () => {
     if(toggleAI.textContent === "Player"){
-        toggleAI.textContent = "AI"
+        toggleAI.textContent = "AI";
     } else {
-        toggleAI.textContent = "Player"
+        toggleAI.textContent = "Player";
     }
 })
