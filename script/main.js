@@ -1,3 +1,4 @@
+//Defined private scope for game functionality
 const Game = (function () {
     let count;
     const message = document.querySelector('#winner');
@@ -31,6 +32,7 @@ const Game = (function () {
             ["", "", ""]];
         }
 
+        //Checks if the items alined are equal and not empty.    
         const _checkLine = (gameboard, row = [0, 1, 2], column = [0, 1, 2]) => {
             if (gameboard[row[0]][column[0]] === gameboard[row[1]][column[1]] && gameboard[row[1]][column[1]] === gameboard[row[2]][column[2]] && gameboard[row[0]][column[0]] !== "") {
                 return [true, gameboard[row[0]][column[0]]];
@@ -38,6 +40,7 @@ const Game = (function () {
             return [false, null];
         }
 
+        //Checks the state of the board and returns the winner movement or tie if there isn't
         const checkBoard = (count, gameboard) => {
             let result = [false, null];
             if (count >= 5) {
@@ -114,6 +117,7 @@ const Game = (function () {
         const render = () => {
             let gameboardArray = Gameboard.get();
             boxes.forEach((box) => {
+                //sets the img src for the box elements
                 box.selector.firstElementChild.src = gameboardArray[box.row][box.column];
                 if (gameboardArray[box.row][box.column] !== ""){
                     box.selector.firstElementChild.style.display = "block";
@@ -154,6 +158,7 @@ const Game = (function () {
         }
     }
 
+    //Event listener for regular two players game
     function markPlayer(box, player1, player2) {
         if (count % 2 === 0) {
             player1.play(box.row, box.column);
@@ -164,6 +169,7 @@ const Game = (function () {
         checkGame(player1, player2);
     }
 
+    //Event listener for Player vs AI game
     function markAI(box,player1,player2){
         player1.play(box.row, box.column);
         count++;
@@ -177,6 +183,9 @@ const Game = (function () {
     }
 
     function playAI(player1,player2){
+        //First creates a list of possible movements for AI player, for then call the minimax algorithm
+        //This space here can be considered a maximization, the only difference is that the objective is
+        //to return the bestBoard possible.
         let firstChildren = createChildren(Gameboard.get(), player2.getMovement());
         let bestBoard = [];
         let maxValue = -Infinity;
@@ -194,9 +203,11 @@ const Game = (function () {
     }
 
     function minimax(node, depth, maximizingPlayer, player1, player2){
+        //First checks if there's a winning state
         let result = Gameboard.check(5, node);
         let ended = true;
         if (!result[0]){
+            //Checks if the current state is an end game state (All boxes are full)
             for(let row = 0; row < node.length; row++){
                 for(let column = 0; column < node.length; column++){
                     if (node[row][column] == ""){
@@ -232,6 +243,7 @@ const Game = (function () {
         }
     }
 
+    //Function to create possible movements based on the parent board.
     function createChildren(node, playerMovement){
         let childList = [];
         for(let row = 0; row < node.length; row++){
@@ -282,10 +294,11 @@ const Game = (function () {
         const player1 = Player(p1, p1Movement);
         const player2 = Player(p2, p2Movement);
 
-
+        //Assigns event listeners based on the selection of the player
         if(toggleAI.textContent === "Player"){
             boxes.forEach((box) => {
                 let newMark = markPlayer.bind(box.selector, box, player1, player2);
+                //I used an object attribute to save the reference to the event listener, so bind could be used.
                 box.newMark = newMark;
                 box.selector.addEventListener('click', newMark);
             })
@@ -306,12 +319,12 @@ const Game = (function () {
 
     return {
         start: start,
-        reset: reset,
-        createChildren: createChildren
+        reset: reset
     }
 
 })()
 
+//Menu and initial config
 function checkvalues(){
     player1selection = player1container.querySelector(":checked");
     player2selection = player2container.querySelector(":checked");
@@ -353,7 +366,7 @@ startGame.addEventListener('click', start);
 restartGame.addEventListener('click', reset);
 finishGame.addEventListener('click', finish);
 
-//Disable other player options 
+//Disable other player options in the Menu
 
 const player1container = document.querySelector("#player1Weapon");
 const player2container = document.querySelector("#player2Weapon");
