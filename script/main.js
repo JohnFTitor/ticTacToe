@@ -168,9 +168,11 @@ const Game = (function () {
         player1.play(box.row, box.column);
         count++;
         if(!checkGame(player1,player2)){
-            playAI(player1,player2);
-            count++;
-            checkGame(player1,player2);
+            setTimeout(function(){
+                playAI(player1,player2);
+                count++;
+                checkGame(player1,player2);
+            }, 300)
         }
     }
 
