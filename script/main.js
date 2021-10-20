@@ -26,7 +26,7 @@ const Game = (function () {
             ["", "", ""]];
         }
 
-        const _checkLine = (row = [0, 1, 2], column = [0, 1, 2]) => {
+        const _checkLine = (gameboard, row = [0, 1, 2], column = [0, 1, 2]) => {
             if (gameboard[row[0]][column[0]] === gameboard[row[1]][column[1]] && gameboard[row[1]][column[1]] === gameboard[row[2]][column[2]] && gameboard[row[0]][column[0]] !== "") {
                 return [true, gameboard[row[0]][column[0]]];
             }
@@ -38,7 +38,7 @@ const Game = (function () {
             if (count >= 5) {
                 for (let row = 0; row < gameboard.length; row++) {
                     let rowArray = [row, row, row];
-                    result = _checkLine(rowArray);
+                    result = _checkLine(gameboard,rowArray);
                     if (result[0]) {
                         return result;
                     }
@@ -46,16 +46,16 @@ const Game = (function () {
                 for (let column = 0; column < gameboard.length; column++) {
                     let rowArray = [0, 1, 2];
                     let columnArray = [column, column, column];
-                    result = _checkLine(rowArray, columnArray);
+                    result = _checkLine(gameboard,rowArray, columnArray);
                     if (result[0]) {
                         return result;
                     }
                 }
-                result = _checkLine();
+                result = _checkLine(gameboard);
                 if (result[0]) {
                     return result;
                 }
-                result = _checkLine([2, 1, 0], [0, 1, 2]);
+                result = _checkLine(gameboard, [2, 1, 0], [0, 1, 2]);
                 if (result[0]) {
                     return result;
                 }
@@ -163,7 +163,19 @@ const Game = (function () {
         count++;
         this.removeEventListener('click', box.newMark);
         if(!checkGame(player1,player2)){
-            let minimaxed = minimax(Gameboard.get(), 3, true, player1, player2);
+            let firstChildren = createChildren(Gameboard.get(), player2.getMovement());
+            let bestBoard = [];
+            let maxValue = -Infinity;
+            firstChildren.forEach( (child) => {
+                let minimaxed = minimax(child, 2, false, player1, player2);
+                if(minimaxed > maxValue){
+                    maxValue = minimaxed;
+                    bestBoard = child.map( (row) => {
+                        return [...row];
+                    })
+                }
+            })
+            console.log(bestBoard);
             playAI(player2);
             checkGame(player1,player2);
         }
