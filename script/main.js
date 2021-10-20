@@ -163,6 +163,7 @@ const Game = (function () {
         count++;
         this.removeEventListener('click', box.newMark);
         if(!checkGame(player1,player2)){
+            let minimaxed = minimax(Gameboard.get(), 3, true, player1, player2);
             playAI(player2);
             checkGame(player1,player2);
         }
@@ -183,7 +184,7 @@ const Game = (function () {
     }
 
     function minimax(node, depth, maximizingPlayer, player1, player2){
-        let result = Gameboard.check(AIcount, node);
+        let result = Gameboard.check(5, node);
         if (depth === 0 || result[0]){
             if  (player2.getMovement() === result[1]) {
                 return +10;
@@ -193,9 +194,19 @@ const Game = (function () {
             return 0;            
         } 
         if (maximizingPlayer){
-            value = -Infinity;
+            let value = -Infinity;
             let children =  createChildren(node, player2.getMovement());
-            console.log(children);
+            children.forEach( (child) => {
+                value = Math.max(value, minimax(child, depth - 1, false, player1, player2));    
+            })
+            return value;
+        } else {
+            let value = Infinity;
+            let children = createChildren(node, player1.getMovement());
+            children.forEach( (child) => {
+                value = Math.min(value, minimax(child, depth - 1, true, player1, player2));
+            })
+            return value;
         }
     }
 

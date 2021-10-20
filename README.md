@@ -15,3 +15,5 @@ After that, I worked in the method that would check if there's a condition for o
 27/09/2021: Fixed the radio button groups and changed functionality for now displaying the icon instead of raw text. I also added some restart and finish buttons but it seems to be the functionality of the game broke, so I'll have to work on that.
 
 30/09/2021: Fixed the bug of the Game, again I misspelled one word in the code. Now both buttons work. I also added an "AI Player" very basic with random.
+
+19/10/2021: Started setting the functionality for the minimax algorithm. So far now, I can create a list of children (possible moves) based on the parent node.  
