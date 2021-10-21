@@ -146,8 +146,8 @@ form {
     position: relative;
     cursor: pointer;
     user-select: none;
-    margin-top: 30px;
-    margin-left: 10px;
+    margin-top: 3rem;
+    margin-left: 1rem;
 }
 
 .radioContainer input {
@@ -163,8 +163,8 @@ form {
     position: absolute;
     top: 0;
     left: 0;
-    height: 75px;
-    width: 75px;
+    height: 7.5rem;
+    width: 7.5rem;
     background-color: rgba(255, 255, 255, 0.7);
     transition: all linear 0.1s;
     display: flex;
@@ -203,12 +203,13 @@ form {
 #game {
     display: none;
     font-family: 'Open Sans', sans-serif;
-    background-color: rgb(226, 226, 226)
+    background-color: rgb(226, 226, 226);
 }
 
 #game h1 {
     font-size: 5rem;
     font-weight: 600;
+    text-align: center;
 }
 
 #gameBoard {
@@ -222,6 +223,7 @@ form {
 
 #gameControl {
     margin-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 #gameControl button {
@@ -371,4 +373,84 @@ form {
 }
 .cube__face--bottom {
     transform: rotateX(-90deg) translateZ(75px);
+}
+
+@media (max-width: 1400px) {
+    #player1 {
+        height: 60vh;
+    }
+    
+    #player2 {
+        height: 60vh;
+    }
+
+    html {
+        font-size: 9px;
+    }
+
+    #game h1 {
+        font-size: 4.5rem;
+    }
+}
+
+@media (max-width: 960px){
+    body {
+        overflow-y: auto;
+    }
+
+    #menu {
+        height: auto;
+    }
+
+    #playerSelectors {
+        flex-direction: column;
+        height: auto;
+    }   
+    
+    .playerSelector {
+        height: 100vh;
+    }
+
+    html {
+        font-size: 10px;
+    }
+
+    #container {
+        height: 200%;
+    }
+
+    #game {
+        height: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    #game h1 {
+        font-size: 3.5rem;
+    }
+
+    #gameControl {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 13rem;
+    }
+
+    #gameBoard {
+        width: 30rem;
+        height: 30rem;
+    }
+
+    .box {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    #player1 {
+        height: 70vh;
+    }
+    
+    #player2 {
+        height: 70vh;
+    }
 }
