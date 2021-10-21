@@ -420,9 +420,7 @@ form {
         height: 200%;
     }
 
-    #game {
-        height: 120vh;
-    }
+  
 }
 
 @media (max-width: 500px) {
@@ -453,5 +451,9 @@ form {
     
     #player2 {
         height: 70vh;
+    }
+
+    #game {
+        height: 120vh;
     }
 }
