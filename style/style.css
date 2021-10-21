@@ -400,6 +400,7 @@ form {
 
     #menu {
         height: auto;
+        overflow-x: hidden;
     }
 
     #playerSelectors {
@@ -420,7 +421,7 @@ form {
     }
 
     #game {
-        height: auto;
+        height: 120vh;
     }
 }
 
