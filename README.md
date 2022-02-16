@@ -1,21 +1,50 @@
-15/09/2021: Today I started this project. First setting a basic logic and trying to understand how I wanted things to work. I think I'm getting most of how the modular pattern works and it's indeed a very organized way of coding, still more to learn, but I liked it. Right now everything aside from the Game methods is in a non-accesible scope, so the adding function to the Gameboard array, as well as the player definition and display behaviour is controlled just by the game, making things more secure and avoiding the need to check for some conditions (Like the one I first set for the add movement to the gameboard array). I may get a special liking to this, but as I said, there's still even more to learn.
+# TicTacToe
 
-16/09/2021: I changed the logic a bit now creating an array of objects to represent each box in the DOM, and relate it to a position in the array, through the row and column attributes. The render method also changed to mate this behaviour. This was intented to make it easier to add event listeners to each one of the elements, which indeed also required a property that points to the DOM element. At this point, whenever the div boxes were clicked it will mark it based on the players turn (which is handled by a counter). To remove the event listeners, I haven't find a way yet.
+> Simple TicTacToe Game using JavaScript Module Pattern and Factory Functions. A MiniMax Algorithm was applied for machine response in the game.
 
-17/09/2021: After a long process of thinking, I came across with a solution to remove the event listeners. As the .bind() method creates a new reference to the function, I needed to store it somewhere but also made it only available and related to the element. How? Well, lets store it as a new property in the box object, bind the box object itself to the event listener, and then call its property when I wanted to remove it. And guess what? It worked just fine.
+![Preview](./tictactoe.gif)
 
-After that, I worked in the method that would check if there's a condition for one winner to come out or end in a tie. I decided that it would be the Gameboard module that handles this, as it's the one with best access to the gameboard array. It just checks the conditions, but doesn't interact with the game, just returns an array with the state of "Did I find a winner?" and "Who?" as values. To affect the game with that result, I'm currently thinking were should I put this function/method first.
+Let's play a game. This TicTacToe game brings back childhood in a virtual manner. Play with a friend by taking turns or dare the machine to see if you can win (Spoiler: You can't. Don't believe me? Try!) 
 
-20/09/2021: Today I added the functionality to the page. I decided to create a function inside the Game object that evaluated the results from the checkboard method. This function is gonna be called inside the event listener for each mark, after the players play() method, thus I can pass as a parameter the player object and could access their properties. Now I'm working in the front page on branch development, to handle player definition and the start of the Game.  
+## Built With
 
-23/09/2021: I wanted to try something new, so I learned a bit of CSS 3D transform with this tutorial: https://3dtransforms.desandro.com/ and made this 3D animation for the Menu, so it looks more like a Game in the intro. It was worth.
+- HTML/CSS, JavaScript
+- Visual Studio Code
 
-24/09/2021: Not too much progress this day. Just added a basic form for the players name statement and selection of the icon. I do have bug though (The radio group doesn't seem to work properly, as one selection stays still).
+## Live Demo
 
-27/09/2021: Fixed the radio button groups and changed functionality for now displaying the icon instead of raw text. I also added some restart and finish buttons but it seems to be the functionality of the game broke, so I'll have to work on that.
+[Live Demo Link](https://johnftitor.github.io/ticTacToe/)
 
-30/09/2021: Fixed the bug of the Game, again I misspelled one word in the code. Now both buttons work. I also added an "AI Player" very basic with random.
 
-19/10/2021: Started setting the functionality for the minimax algorithm. So far now, I can create a list of children (possible moves) based on the parent node.  
+## Getting Started
 
-20/10/2021: Today I finished the project, although some optimization can still be implemented (And I will do so). The minimax algorithm was an exciting experience, really confusing, I had to go through the code multiple times... This kind of challenges do make things more interesting. Now, there's an unbeatable AI in the game. For those who want to challenge her, I warn you: She is like LaPlace's Demon.
+To get a local copy up and running follow these simple example steps.
+
+- Clone this repository with git clone```https://github.com/JohnFTitor/ticTacToe.git``` using your terminal or command line.
+- Change to the project directory by entering : <br>
+```cd ticTacToe``` in the terminal
+
+### Setup
+
+You can clone this repository or simply download the files as a .zip
+If you want to set up a personal repository based on this one, you can as well fork it.
+
+### Usage
+
+You're free to use this project however you like it for educational purposes. Just keep in mind the acknowledgment described below
+
+### Deployment
+
+The deployment can be found in the Github Pages of this repository or through the link provided above
+
+## Authors
+
+👤 **Andrés Felipe Arroyave Naranjo**
+
+- GitHub: [@JohnFTitor](https://github.com/JohnFTitor)
+- Twitter: [@johnftitor](https://twitter.com/johnftitor)
+- LinkedIn: [Andres](https://www.linkedin.com/in/andresfelipe117/?locale=en_US)
+
+## Show your support
+
+Give a ⭐️ if you like this project!
