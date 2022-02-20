@@ -4,7 +4,7 @@
 
 ![Preview](./tictactoe.gif)
 
-Let's play a game. This TicTacToe game brings back childhood in a virtual manner. Play with a friend by taking turns or dare the machine to see if you can win (Spoiler: You can't. Don't believe me? Try!) 
+Let's play a game. This TicTacToe game brings back childhood in a virtual manner. Play with a friend by taking turns or dare the machine to see if you can win (Spoiler: You can't. Don't believe me? Try!
 
 ## Built With
 
